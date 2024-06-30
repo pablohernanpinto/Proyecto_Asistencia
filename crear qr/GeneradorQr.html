@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de QR</title>
+  <script src="./qrcode-generator/js/qrcode.js"></script> <!-- Asegúrate de ajustar la ruta según donde tengas el archivo -->
+</head>
+<body>
+  <div id="qrcode"></div>
+
+  <script>
+    // Obtén la fecha actual
+    const currentDate = new Date().toLocaleDateString();
+    const aux = String(currentDate).split("/")
+    //console.log(String(aux[0]*159123)+"DocType"+String(aux[1]*159123)+"Type"+String(aux[2]*159123))
+    const aux2 = String(aux[0]*159123)+"Type"+String(aux[1]*159123)+"Type"+String(aux[2]*159123)
+    // Crea el QR code con la fecha actual
+    const typeNumber = 20;
+    const errorCorrectionLevel = 'L';
+    const qr = qrcode(typeNumber, errorCorrectionLevel);
+    qr.addData(aux2);
+    qr.make();
+
+    // Inserta el código QR en el elemento HTML
+    const qrElement = document.getElementById('qrcode');
+    qrElement.innerHTML = qr.createSvgTag();
+  </script>
+</body>
+</html>
